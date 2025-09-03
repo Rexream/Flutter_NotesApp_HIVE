@@ -5,7 +5,6 @@
 # Dependencies
 
     flutter_staggered_grid_view: ^0.7.0
-    flutter_slidable: 4.0.1
     hive_ce: ^2.11.3
     hive_ce_flutter: ^2.3.1
 
