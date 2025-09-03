@@ -1,16 +1,16 @@
-# not_defteri
+# NOTES APP
 
-A new Flutter project.
+    Notes Application with using HIVE database
 
-## Getting Started
+# Dependencies
 
-This project is a starting point for a Flutter application.
+    flutter_staggered_grid_view: ^0.7.0
+    flutter_slidable: 4.0.1
+    hive_ce: ^2.11.3
+    hive_ce_flutter: ^2.3.1
 
-A few resources to get you started if this is your first Flutter project:
+# About
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+    This is a Notes App with basic abilities and design, with this app you can add a new note that include a title and a note content.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+    For UI design i use MasonryGridView that comes with "flutter_staggered_grid_view" package and for Database i use Hıve databases that comes with "hive_ce_flutter"
