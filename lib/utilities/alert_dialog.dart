@@ -40,14 +40,14 @@ class AddNote extends StatelessWidget {
 
                 decoration: InputDecoration(
                   hintText: "Başlık",
-                  hintStyle: TextStyle(fontSize: 32),
+                  hintStyle: TextStyle(fontSize: 25),
                 ),
 
                 expands: false,
                 maxLines: null,
-                cursorHeight: 32,
+                cursorHeight: 25,
 
-                style: TextStyle(fontSize: 32),
+                style: TextStyle(fontSize: 25, height: 1),
               ),
             ),
 

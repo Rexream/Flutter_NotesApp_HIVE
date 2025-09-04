@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
   TextEditingController noteTitle = TextEditingController();
   TextEditingController noteText = TextEditingController();
 
-  late bool doesHaveNote;
+  late int selectedNote;
 
   @override
   void initState() {
@@ -55,6 +55,30 @@ class _HomePageState extends State<HomePage> {
   void addNewNote() {
     setState(() {
       noteDataBase.noteList.add([noteTitle.text, noteText.text, false]);
+      noteDataBase.updateData();
+    });
+
+    noteTitle.clear();
+    noteText.clear();
+    Navigator.of(context).pop();
+  }
+
+  void editNoteDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AddNote(
+        noteTitle: noteTitle,
+        noteText: noteText,
+        onSave: editNote,
+      ),
+    );
+  }
+
+  void editNote() {
+    setState(() {
+      noteDataBase.noteList[selectedNote][0] = noteTitle.text;
+      noteDataBase.noteList[selectedNote][1] = noteText.text;
+      noteDataBase.noteList[selectedNote][2] = false;
       noteDataBase.updateData();
     });
 
@@ -118,17 +142,62 @@ class _HomePageState extends State<HomePage> {
                 itemCount: noteDataBase.noteList.length,
                 itemBuilder: (context, index) {
                   return GestureDetector(
-                    onLongPress: () {
+                    onTap: () {
                       setState(() {
                         noteDataBase.noteList[index][2] =
                             !noteDataBase.noteList[index][2];
                       });
                     },
 
-                    child: NoteTile(
-                      noteTitle: noteDataBase.noteList[index][0],
-                      noteText: noteDataBase.noteList[index][1],
-                      isSelectable: noteDataBase.noteList[index][2],
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF868686),
+
+                        borderRadius: BorderRadius.circular(12),
+
+                        border: noteDataBase.noteList[index][2]
+                            ? BoxBorder.all(
+                                color: const Color(0xFF8D0101),
+                                width: 4,
+                              )
+                            : BoxBorder.all(
+                                color: const Color(0xFF292929),
+                                width: 4,
+                              ),
+                      ),
+
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    selectedNote = index;
+
+                                    noteTitle.text =
+                                        noteDataBase.noteList[index][0];
+                                    noteText.text =
+                                        noteDataBase.noteList[index][1];
+
+                                    editNoteDialog();
+                                  });
+                                },
+                                icon: Icon(Icons.edit),
+                              ),
+                            ],
+                          ),
+
+                          NoteTile(
+                            noteTitle: noteDataBase.noteList[index][0],
+                            noteText: noteDataBase.noteList[index][1],
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 },
